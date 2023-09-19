@@ -76,6 +76,10 @@ export default function EditScreenInfo({path}: {path: string}) {
     },
   ];
 
+  const sortedPartNames = partNames.sort((a, b) => {
+    return a.label.localeCompare(b.label);
+  });
+
   const apiUrl: string = `http://${
     Platform?.OS === 'android' ? '10.0.2.2' : 'localhost'
   }:3001/machine-health`;
@@ -120,7 +124,7 @@ export default function EditScreenInfo({path}: {path: string}) {
       />
 
       <Text style={styles.label}>Part Name</Text>
-      <Picker value={partName} onSetValue={setPartName} items={partNames} />
+      <Picker value={partName} onSetValue={setPartName} items={sortedPartNames} />
 
       <Text style={styles.label}>Part Value</Text>
       <TextInput
