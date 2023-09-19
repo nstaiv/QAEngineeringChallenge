@@ -116,22 +116,27 @@ export default function EditScreenInfo({path}: {path: string}) {
 
   return (
     <View>
-      <Text style={styles.label}>Machine Name</Text>
-      <Picker
-        value={machineName}
-        onSetValue={setMachineName}
-        items={machineNames}
-      />
+      <Text style={styles.label} testID='test__machine-name-label'>Machine Name</Text>
+      <div data-cy="test__machine_name">
+        <Picker
+          value={machineName}
+          onSetValue={setMachineName}
+          items={machineNames}
+        />
+      </div>
 
-      <Text style={styles.label}>Part Name</Text>
-      <Picker value={partName} onSetValue={setPartName} items={sortedPartNames} />
+      <Text style={styles.label} testID='test__part-name-label'>Part Name</Text>
+      <div data-cy="test__part_name">
+        <Picker value={partName} onSetValue={setPartName} items={sortedPartNames}/>
+      </div>
 
-      <Text style={styles.label}>Part Value</Text>
+      <Text style={styles.label} testID='test__part-value-name-label'>Part Value</Text>
       <TextInput
         style={styles.input}
         value={partValue}
         onChangeText={(text) => setPartValue(text)}
         placeholder='Enter part value'
+        testID='test__part-value'
       />
 
       <Button title='Save' onPress={savePart} />

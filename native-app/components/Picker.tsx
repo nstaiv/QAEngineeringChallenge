@@ -4,7 +4,7 @@ import RNPickerSelect from 'react-native-picker-select';
 function PickerIos({value, onSetValue, items}) {
   return (
     <RNPickerSelect
-      placeholder={{label: 'Select a machine', value: ''}}
+      placeholder={{label: 'Select a machine 1', value: ''}}
       items={items}
       onValueChange={(value) => onSetValue(value)}
       value={value}
