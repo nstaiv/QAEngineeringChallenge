@@ -40,3 +40,33 @@ describe('Multiple Machine Health', () => {
     cy.get('button').contains('Reset Machine Data').click();
   })
 })
+
+describe('Machine Health', () => {
+  it('Calculates Individual Machine with multiple parts', () => {
+    cy.visit('/');
+    cy.visit('/two');
+    cy.get('[data-testid="web_picker"]').first().select('paintingStation');
+    cy.get('[data-testid="web_picker"]').last().select('pressure');
+    cy.get('input').type('55.0')
+    cy.get('button').contains('Save').as('saveBtn');
+    cy.get('@saveBtn').click();
+    cy.get('[data-testid="web_picker"]').last().select('nozzleCondition');
+    cy.get('input').clear().type('0.5');
+    cy.get('@saveBtn').click();
+    cy.go('back');
+    cy.go('forward');
+    cy.get('[data-testid="web_picker"]').first().select('assemblyLine');
+    cy.get('[data-testid="web_picker"]').last().select('speed');
+    cy.get('input').clear().type('8.0');
+    cy.get('[data-testid="web_picker"]').last().select('fittingTolerance');
+    cy.get('input').clear().type('0.02')
+    cy.get('@saveBtn').click();
+    cy.visit('/');
+    cy.contains('Calculate Health').click();
+    cy.contains('Machine Health Score').should('be.visible');
+    cy.contains('Reset Machine Data').click();
+    cy.contains('Factory Health Score').should('not.exist');
+
+
+  })
+})
