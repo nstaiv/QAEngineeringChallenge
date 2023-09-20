@@ -1,5 +1,5 @@
 describe("Http requests", () => {
-  it("POST request", () => {
+  it("Welding Robot API status code", () => {
     cy.request({
       method: "POST",
       url: "http://localhost:3001/machine-health",
@@ -15,7 +15,7 @@ describe("Http requests", () => {
       .its("status")
       .should("eq", 200);
   });
-  it("Should create a new machine response", () => {
+  it("Welding Robot API calculation ", () => {
     cy.request({
       method: "POST",
       url: "http://localhost:3001/machine-health",
@@ -30,5 +30,25 @@ describe("Http requests", () => {
     }).then((res) => {
       expect(res.body).to.have.property("factory").equal("70.49");
     });
+  });
+});
+
+it("Assembly Line API", () => {
+  cy.request({
+    method: "POST",
+    url: "http://localhost:3001/machine-health",
+    body: {
+      machines: {
+        assemblyLine: {
+          speed: "8.0",
+          fittingTolerance: "0.02",
+          beltSpeed: "1.5",
+          alignmentAccuracy: "0.5",
+        },
+      },
+    },
+  }).then((res) => {
+    expect(res.status).equal(200);
+    expect(res.body).to.have.property("factory").equal("72.43");
   });
 });
